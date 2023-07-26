@@ -1,20 +1,44 @@
-const list1 = ['Arjun', 'Adwait', 'Swapnil', 'Amit', 'Vishal', 'Adnan'];
-const list2 = ['Adwait', 'Laxman', 'Amit', 'Adnan', 'Nitin', 'Gaurav'];
+let list1 = ['Arjun', 'Adwait', 'Swapnil', 'Amit', 'Vishal', 'Adnan'];
+let list2 = ['Adwait', 'Laxman', 'Amit', 'Adnan', 'Nitin', 'Gaurav'];
 
-// Get a unique set of users from List1 which are not in List2
-const uniqueUsersInList1 = new Set(list1.filter(user => !list2.includes(user)));
+let uniqueList1 = [], uniqueList2 = [], commonUsers = [];
 
-// Get a unique set of users from List2 which are not in List1
-const uniqueUsersInList2 = new Set(list2.filter(user => !list1.includes(user)));
+// a. Get a unique set of users from List1 which are not in List2
+for (let i = 0; i < list1.length; i++) {
+    let found = false;
+    for (let j = 0; j < list2.length; j++) {
+        if (list1[i] === list2[j]) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) uniqueList1.push(list1[i]);
+}
 
-// Get a set of users who are present in List1 and List2 both (intersection of list1 & list2)
-const commonUsers = new Set(list1.filter(user => list2.includes(user)));
+console.log(uniqueList1);
 
-// Convert sets to arrays for easier display
-const uniqueUsersInList1Arr = Array.from(uniqueUsersInList1);
-const uniqueUsersInList2Arr = Array.from(uniqueUsersInList2);
-const commonUsersArr = Array.from(commonUsers);
+// b. Get a unique set of users from List2 which are not in List1
+for (let i = 0; i < list2.length; i++) {
+    let found = false;
+    for (let j = 0; j < list1.length; j++) {
+        if (list2[i] === list1[j]) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) uniqueList2.push(list2[i]);
+}
 
-console.log(uniqueUsersInList1Arr);
-console.log( uniqueUsersInList2Arr);
-console.log( commonUsersArr);
+console.log(uniqueList2);
+
+// c. Get a set of users who are present in both List1 and List2 (intersection of list1 & list2)
+for (let i = 0; i < list1.length; i++) {
+    for (let j = 0; j < list2.length; j++) {
+        if (list1[i] === list2[j]) {
+            commonUsers.push(list1[i]);
+            break;
+        }
+    }
+}
+
+console.log(commonUsers);
